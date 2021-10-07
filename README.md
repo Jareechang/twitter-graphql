@@ -1,4 +1,4 @@
-# Twitter graphql
+# Twitter GraphQL
 
 Proof of concept of fullstack GraphQL application to evaluate tooling and workflow.
 
