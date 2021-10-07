@@ -7,6 +7,7 @@ The application is a rebuild of a minimal verson of the twitter website.
 - [Motivation](#motivation)  
 - [Technologies](#technologies)  
 - [Project structure](#project-structure)  
+- [Todo](#todo)  
 - [Notes](#notes)  
 
 ## Motivation
@@ -33,6 +34,10 @@ The application is a rebuild of a minimal verson of the twitter website.
 ## Project structure
 
 TODO
+
+## Todo
+
+- [ ] investigate [@graphql-tools](https://www.graphql-tools.com/)
 
 ## Notes
 
