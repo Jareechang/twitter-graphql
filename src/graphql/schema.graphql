@@ -1,0 +1,65 @@
+type Query {
+  """
+  users
+
+  """
+  users: [UserResponse!]!
+  user(id: ID!): UserResponse
+  addUser(name: String!): UserResponse!
+  removeUser(id: ID!): Boolean
+
+  """
+  tweets feed / trending items
+  """
+  feed: [TweetItemResponse!]!
+
+  trending: [TrendingItem!]!
+}
+
+type Mutation {
+  test: String!
+}
+
+type TweetItem {
+  id: ID!
+  user: ID!
+  content: String!
+  comments: Int!
+  retweets: Int!
+  likes: Int
+}
+
+type TweetItemResponse {
+  id: ID!
+  user: User!
+  content: String!
+  comments: Int!
+  retweets: Int!
+  likes: Int
+}
+
+type TrendingItem {
+  id: ID!
+  tweets: String
+  title: String!
+  thumbnail: String!
+}
+
+type User {
+  id: ID!
+  followers: [String]
+  name: String!
+}
+
+type UserResponse {
+  id: ID!
+  followers: [User]
+  name: String!
+}
+
+type Tweet {
+  id: ID!
+  text: String!
+  image: String!
+  author: ID!
+}

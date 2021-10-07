@@ -1,0 +1,23 @@
+{
+  "extends": "../../node_modules/@common-web/ts-config/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "paths": {
+      "@app/types": ["../types"],
+      "@app/gql-types": ["../graphql/generated.ts"],
+      "@app/graphql/*": ["../graphql/*"],
+      "@app/graphql": ["../graphql/index.ts"],
+      "@app/server/*": ["./*"]
+    }
+  },
+  "include": [
+    "./**/*.ts",
+    "./global.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

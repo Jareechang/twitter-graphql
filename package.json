@@ -1,0 +1,42 @@
+{
+  "name": "twitter-graphql",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "check": "yarn typecheck:server && yarn typecheck:client",
+    "typecheck:server": "tsc -p ./src/server",
+    "typecheck:client": "tsc -p ./src/client",
+    "generate": "graphql-codegen",
+    "prebuild": "yarn generate",
+    "build": "node ./build/index.js",
+    "start": "yarn build && node ./dist/index.js",
+    "start:watch": "npx nodemon --ext tsx,ts,js,graphql --watch src --exec \"yarn start\""
+  },
+  "devDependencies": {
+    "@common-web/esbuild": "1.x.x",
+    "@common-web/ts-config": "1.x.x",
+    "@graphql-codegen/add": "^3.1.0",
+    "@graphql-codegen/cli": "^2.2.0",
+    "@graphql-codegen/introspection": "^2.1.0",
+    "@graphql-codegen/typescript": "^2.2.2",
+    "@graphql-codegen/typescript-operations": "^2.1.6",
+    "@graphql-codegen/typescript-react-query": "^3.0.1",
+    "@types/graphql": "^14.5.0",
+    "@types/react": "^17.0.27",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-query": "^1.2.9",
+    "fs-extra": "^10.0.0",
+    "nodemon": "^2.0.13"
+  },
+  "dependencies": {
+    "apollo-server-core": "^3.3.0",
+    "apollo-server-express": "^3.3.0",
+    "express": "^4.17.1",
+    "graphql": "^15.6.1",
+    "graphql-request": "^3.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-query": "^3.25.1"
+  }
+}

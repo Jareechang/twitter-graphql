@@ -1,0 +1,23 @@
+{
+  "extends": "../../node_modules/@common-web/ts-config/tsconfig.base.json",
+  "compilerOptions": {
+    "target": "es5",
+    "jsx": "react",
+    "noEmit": true,
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
+    "skipLibCheck": true,
+    "paths": {
+      "@app/types": ["../types"],
+      "@app/client/*": ["./*"],
+      "@app/graphql": ["../graphql/generated.ts"]
+    }
+  },
+  "include": [
+    "./**/*.ts",
+    "./**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

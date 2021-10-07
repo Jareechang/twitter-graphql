@@ -1,0 +1,10 @@
+query fetchUser {
+  users {
+    id
+    name
+    followers {
+      id
+      name
+    }
+  }
+}
