@@ -9,6 +9,9 @@ export default {
     ...trendingQueries
   },
   Mutation: {
-    test: () => 'test'
+    test: () => 'test',
+    tweet: (parent, args) => {
+      return `id: ${args.id}, content: ${args.content}`;
+    }
   }
 };

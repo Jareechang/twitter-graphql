@@ -1,0 +1,3 @@
+mutation createTweet($id: ID!, $content: String!){
+  tweet(id: $id, content: $content)
+}

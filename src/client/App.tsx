@@ -1,11 +1,14 @@
 import * as React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+//import { Button } from '@mui/material';
 import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
-import {
-  Users
-} from '@app/client/components'
+import theme from '@app/client/theme';
+import { Layout } from '@app/client/components'
+
+import { Routes } from '@app/client/routes';
 
 interface AppProps {}
 
@@ -15,11 +18,13 @@ const App: React.FC<AppProps> = (
   props
 ) => {
   return (
-     <QueryClientProvider client={queryClient}>
-       <div>
-         <Users />
-       </div>
-     </QueryClientProvider>
+    <ThemeProvider theme={theme}>
+      <QueryClientProvider client={queryClient}>
+        <Layout>
+          <Routes />
+        </Layout>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 
