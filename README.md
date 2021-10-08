@@ -24,6 +24,9 @@ The application is a rebuild of a minimal verson of the twitter website.
 - graphql   
 - react  
 - react-dom  
+- react-router-dom
+- [styled-components](https://styled-components.com/)
+- [mui/material@5.x](https://mui.com/)
 - [react-query](https://github.com/tannerlinsley/react-query)  
 - [graphql-request](https://github.com/prisma-labs/graphql-request)  
 - [graphql-code-generator](https://github.com/dotansimha/graphql-code-generator)  
