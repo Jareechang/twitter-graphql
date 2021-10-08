@@ -1,12 +1,8 @@
 import * as React from 'react';
-import {
-  QueryObserverResult
-} from 'react-query';
 
 import {
   Box,
   Card,
-  Button,
   IconButton,
   CardContent,
   CardActions,
@@ -17,7 +13,11 @@ import RepeatIcon from '@mui/icons-material/Repeat';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
-import { client } from '@app/client/external';
+import {
+  UsernameText,
+  TwitterhandleText,
+  FavoritedIcon,
+} from './styles';
 
 export interface FeedCardProps {
   /*
@@ -33,12 +33,6 @@ export interface FeedCardProps {
    * */
   content: string;
 }
-
-import {
-  UsernameText,
-  TwitterhandleText,
-  FavoritedIcon,
-} from './styles';
 
 const FeedCard: React.FC<FeedCardProps> = (
   props

@@ -1,1 +1,2 @@
-export { default as Feed } from './Feed';
+export { default as FeedList } from './FeedList';
+export * from './hooks';

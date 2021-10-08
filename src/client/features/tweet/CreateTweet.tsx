@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {
-  useQueryClient,
   UseBaseMutationResult
 } from 'react-query';
 import { Button } from '@app/client/components';
@@ -13,17 +12,22 @@ import {
   CreateTweetMutation,
   CreateTweetMutationVariables,
   useCreateTweetMutation,
-  FetchFeedListQuery
 } from '@app/graphql';
 import { client } from '@app/client/external';
+
+import { useFeedListState } from '@app/client/features/feed';
 
 interface CreateTweetProps {}
 
 const CreateTweet: React.FC<CreateTweetProps> = (
   props
 ) => {
-  const queryClient = useQueryClient();
+  // TODO Hard coded for now, refactor later with auth
+  const userId: string = '1';
+  const userName: string = 'Alice';
   const [text, setText] = React.useState('');
+  const feedListState = useFeedListState();
+
   const createTweetMutation: UseBaseMutationResult<
     CreateTweetMutation,
     any,
@@ -32,48 +36,42 @@ const CreateTweet: React.FC<CreateTweetProps> = (
       client,
       {
         onMutate: () => {
-          const content = text;
+          feedListState.cancelQueries();
+          const previousFeedList = feedListState.get();
+          feedListState.update({
+            content: text,
+            user: {
+              id: userId,
+              name: userName
+            }
+          });
           setText('');
-          queryClient.cancelQueries('fetchFeedList');
-          const previousFeedList = queryClient.getQueryData<FetchFeedListQuery>('fetchFeedList');
-          const feedListData = previousFeedList?.feed?.data ?? [];
-          if (feedListData.length > 0) {
-            queryClient.setQueryData<FetchFeedListQuery>(
-              'fetchFeedList',
-              {
-                feed: {
-                  data: [
-                    {
-                      id: `${feedListData.length + 1}`,
-                      content,
-                      user: {
-                        id: '1',
-                      }
-                    }
-                  ].concat(feedListData)
-                }
-              }
-            );
-          }
           return previousFeedList;
         },
-        onSettled: () => {
-          queryClient.invalidateQueries('fetchFeedList');
+        onError: () => {
+          console.error(
+            'There was an error'
+          );
+        },
+        onSuccess: () => {
+          feedListState.invalidateQueries('fetchFeedList');
         }
       }
     );
+
   const handleSubmit = React.useCallback((e) => {
     if (text) {
       createTweetMutation.mutate({
-        // Hard coded for now
-        id: '1',
+        id: userId,
         content: text,
       });
     }
   }, [createTweetMutation]);
+
   const handleInputChange = React.useCallback((e) => {
     setText(e.target.value);
   }, [setText]);
+
   return (
     <Box>
       <TextField

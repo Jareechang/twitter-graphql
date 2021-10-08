@@ -16,9 +16,11 @@
   },
   "include": [
     "./**/*.ts",
-    "./**/*.tsx"
+    "./**/*.tsx",
+    "./global.d.ts"
   ],
   "exclude": [
+    "@types/ramda",
     "node_modules"
   ]
 }

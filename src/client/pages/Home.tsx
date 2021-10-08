@@ -5,7 +5,7 @@ import {
   Grid,
 } from '@mui/material';
 import { CreateTweet } from '@app/client/features/tweet';
-import { Feed } from '@app/client/features/feed';
+import { FeedList } from '@app/client/features/feed';
 
 interface HomePageProps {}
 
@@ -18,7 +18,7 @@ const Home: React.FC<HomePageProps> = (
         <Grid item md={8} xs={12}>
           <Box py={4}>
             <CreateTweet />
-            <Feed />
+            <FeedList />
           </Box>
         </Grid>
         <Grid item md={4}>

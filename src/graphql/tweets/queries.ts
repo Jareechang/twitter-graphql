@@ -49,15 +49,19 @@ export const feed = (): TweetItemResponse[] => {
 export const createTweet = (
   parent: unknown,
   args: MutationCreateTweetArgs
-) : TweetItem => {
-  const tweet = {
-    id: `${tweets.length + 1}`,
-    comments: 0,
-    retweets: 0,
-    likes: 0,
-    content: args.content,
-    user: args.id,
-  };
-  tweets = [tweet, ...tweets];
-  return tweet;
+) : Promise<TweetItem> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const tweet = {
+        id: `${tweets.length + 1}`,
+        comments: 0,
+        retweets: 0,
+        likes: 0,
+        content: args.content,
+        user: args.id,
+      };
+      tweets = [tweet, ...tweets];
+      resolve(tweet);
+    }, 1500);
+  });
 }
