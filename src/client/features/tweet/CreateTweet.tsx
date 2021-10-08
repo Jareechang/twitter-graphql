@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {
+  useQueryClient,
   UseBaseMutationResult
 } from 'react-query';
 import { Button } from '@app/client/components';
@@ -11,7 +12,8 @@ import {
 import {
   CreateTweetMutation,
   CreateTweetMutationVariables,
-  useCreateTweetMutation
+  useCreateTweetMutation,
+  FetchFeedListQuery
 } from '@app/graphql';
 import { client } from '@app/client/external';
 
@@ -20,6 +22,7 @@ interface CreateTweetProps {}
 const CreateTweet: React.FC<CreateTweetProps> = (
   props
 ) => {
+  const queryClient = useQueryClient();
   const [text, setText] = React.useState('');
   const createTweetMutation: UseBaseMutationResult<
     CreateTweetMutation,
@@ -27,6 +30,37 @@ const CreateTweet: React.FC<CreateTweetProps> = (
     CreateTweetMutationVariables
     > = useCreateTweetMutation(
       client,
+      {
+        onMutate: () => {
+          const content = text;
+          setText('');
+          queryClient.cancelQueries('fetchFeedList');
+          const previousFeedList = queryClient.getQueryData<FetchFeedListQuery>('fetchFeedList');
+          const feedListData = previousFeedList?.feed?.data ?? [];
+          if (feedListData.length > 0) {
+            queryClient.setQueryData<FetchFeedListQuery>(
+              'fetchFeedList',
+              {
+                feed: {
+                  data: [
+                    {
+                      id: `${feedListData.length + 1}`,
+                      content,
+                      user: {
+                        id: '1',
+                      }
+                    }
+                  ].concat(feedListData)
+                }
+              }
+            );
+          }
+          return previousFeedList;
+        },
+        onSettled: () => {
+          queryClient.invalidateQueries('fetchFeedList');
+        }
+      }
     );
   const handleSubmit = React.useCallback((e) => {
     if (text) {

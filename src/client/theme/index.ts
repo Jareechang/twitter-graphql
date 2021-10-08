@@ -12,4 +12,6 @@ const theme: Theme = createTheme({
   },
 });
 
+console.log('theme: ', theme);
+
 export default theme;

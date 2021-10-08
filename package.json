@@ -33,6 +33,7 @@
     "nodemon": "^2.0.13"
   },
   "dependencies": {
+    "@mui/icons-material": "^5.0.3",
     "@mui/material": "^5.0.3",
     "@mui/styled-engine-sc": "^5.0.3",
     "apollo-server-core": "^3.3.0",

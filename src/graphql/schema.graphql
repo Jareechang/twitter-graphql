@@ -18,7 +18,7 @@ type Query {
 
 type Mutation {
   test: String!
-  tweet(id: ID!, content: String!): String!
+  createTweet(id: ID!, content: String!): TweetItem!
 }
 
 type TweetItem {

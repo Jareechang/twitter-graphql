@@ -1,17 +1,14 @@
 import * as userQueries from '@app/graphql/users';
-import * as tweetQueries from '@app/graphql/tweets'
+import { feed, createTweet } from '@app/graphql/tweets'
 import * as trendingQueries from '@app/graphql/trending';
 
 export default {
   Query: {
     ...userQueries,
-    ...tweetQueries,
-    ...trendingQueries
+    ...trendingQueries,
+    feed,
   },
   Mutation: {
-    test: () => 'test',
-    tweet: (parent, args) => {
-      return `id: ${args.id}, content: ${args.content}`;
-    }
+    createTweet
   }
 };

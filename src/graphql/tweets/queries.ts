@@ -1,5 +1,7 @@
 // Tweet gets transformed in a weird way by codegen so using TweetItem
 import {
+  Scalars,
+  MutationCreateTweetArgs,
   TweetItem,
   TweetItemResponse
 } from '@app/gql-types';
@@ -8,7 +10,7 @@ import {
   user,
 } from '@app/graphql/users/queries';
 
-const tweets : TweetItem[] = [
+let tweets : TweetItem[] = [
   {
     id: '1',
     comments: 50,
@@ -42,4 +44,20 @@ export const feed = (): TweetItemResponse[] => {
       user: user(tweet.user)
     };
   }) as TweetItemResponse[])
+}
+
+export const createTweet = (
+  parent: unknown,
+  args: MutationCreateTweetArgs
+) : TweetItem => {
+  const tweet = {
+    id: `${tweets.length + 1}`,
+    comments: 0,
+    retweets: 0,
+    likes: 0,
+    content: args.content,
+    user: args.id,
+  };
+  tweets = [tweet, ...tweets];
+  return tweet;
 }

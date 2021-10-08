@@ -1,0 +1,10 @@
+query fetchFeedList {
+  feed {
+    id
+    content
+    user {
+      id
+      name
+    }
+  }
+}

@@ -21,12 +21,12 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createTweet: TweetItem;
   test: Scalars['String'];
-  tweet: Scalars['String'];
 };
 
 
-export type MutationTweetArgs = {
+export type MutationCreateTweetArgs = {
   content: Scalars['String'];
   id: Scalars['ID'];
 };
@@ -113,13 +113,18 @@ export type FetchUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FetchUserQuery = { __typename?: 'Query', users: Array<{ __typename?: 'UserResponse', id: string, name: string, followers?: Array<{ __typename?: 'User', id: string, name: string } | null | undefined> | null | undefined }> };
 
+export type FetchFeedListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchFeedListQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'TweetItemResponse', id: string, content: string, user: { __typename?: 'User', id: string, name: string } }> };
+
 export type CreateTweetMutationVariables = Exact<{
   id: Scalars['ID'];
   content: Scalars['String'];
 }>;
 
 
-export type CreateTweetMutation = { __typename?: 'Mutation', tweet: string };
+export type CreateTweetMutation = { __typename?: 'Mutation', createTweet: { __typename?: 'TweetItem', id: string, content: string, user: string } };
 
 
 export const FetchUserDocument = `
@@ -148,9 +153,40 @@ export const useFetchUserQuery = <
       fetcher<FetchUserQuery, FetchUserQueryVariables>(client, FetchUserDocument, variables, headers),
       options
     );
+export const FetchFeedListDocument = `
+    query fetchFeedList {
+  feed {
+    id
+    content
+    user {
+      id
+      name
+    }
+  }
+}
+    `;
+export const useFetchFeedListQuery = <
+      TData = FetchFeedListQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables?: FetchFeedListQueryVariables, 
+      options?: UseQueryOptions<FetchFeedListQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => 
+    useQuery<FetchFeedListQuery, TError, TData>(
+      variables === undefined ? ['fetchFeedList'] : ['fetchFeedList', variables],
+      fetcher<FetchFeedListQuery, FetchFeedListQueryVariables>(client, FetchFeedListDocument, variables, headers),
+      options
+    );
 export const CreateTweetDocument = `
     mutation createTweet($id: ID!, $content: String!) {
-  tweet(id: $id, content: $content)
+  createTweet(id: $id, content: $content) {
+    id
+    content
+    content
+    user
+  }
 }
     `;
 export const useCreateTweetMutation = <

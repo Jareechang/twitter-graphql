@@ -5,6 +5,7 @@ import {
   Grid,
 } from '@mui/material';
 import { CreateTweet } from '@app/client/features/tweet';
+import { Feed } from '@app/client/features/feed';
 
 interface HomePageProps {}
 
@@ -14,12 +15,10 @@ const Home: React.FC<HomePageProps> = (
   return (
     <Box>
       <Grid container>
-        <Grid item md={8}>
+        <Grid item md={8} xs={12}>
           <Box py={4}>
             <CreateTweet />
-            <Box>
-              User’s feed goes here
-            </Box>
+            <Feed />
           </Box>
         </Grid>
         <Grid item md={4}>
