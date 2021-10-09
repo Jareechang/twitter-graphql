@@ -11,6 +11,8 @@ type Query {
   """
   tweets feed / trending items
   """
+  tweet(id: ID!): TweetItemResponse
+
   feed: [TweetItemResponse!]!
 
   trending: [TrendingItem!]!

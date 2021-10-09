@@ -23,6 +23,9 @@ export const addFeedListState = (
     feed: [
       {
         id: `${feedList.length + 1}`,
+        likes: 0,
+        retweets: 0,
+        comments: 0,
         ...data,
       },
       ...feedList

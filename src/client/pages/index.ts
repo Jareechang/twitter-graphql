@@ -1,3 +1,3 @@
-export { default as Home } from './Home';
-export { default as Profile } from './Profile';
-export { default as ViewTweet } from './ViewTweet';
+export { default as HomePage } from './HomePage';
+export { default as ProfilePage } from './ProfilePage';
+export { default as ViewTweetPage } from './ViewTweetPage';

@@ -20,7 +20,10 @@ export const CustomLink = styled(ReactRouterLink)`
 `;
 
 export const CustomLinkText = styled(
-  ({ active, ...restProps }) => <Typography {...restProps} />
+  ({
+    active,
+    ...restProps
+  }) => <Typography {...restProps} />
 )`
   color: ${getTextColor};
   font-weight: ${getFontWeight};

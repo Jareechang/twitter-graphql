@@ -1,5 +1,6 @@
 export * from './users';
 export * from './layouts';
 export * from './button';
-export * from './feed-card';
+export * from './tweet';
 export * from './links';
+export * from './comments';

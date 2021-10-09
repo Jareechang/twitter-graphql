@@ -34,10 +34,11 @@ export type MutationCreateTweetArgs = {
 export type Query = {
   __typename?: 'Query';
   addUser: UserResponse;
-  /** tweets feed / trending items */
   feed: Array<TweetItemResponse>;
   removeUser?: Maybe<Scalars['Boolean']>;
   trending: Array<TrendingItem>;
+  /** tweets feed / trending items */
+  tweet?: Maybe<TweetItemResponse>;
   user?: Maybe<UserResponse>;
   /** users */
   users: Array<UserResponse>;
@@ -50,6 +51,11 @@ export type QueryAddUserArgs = {
 
 
 export type QueryRemoveUserArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryTweetArgs = {
   id: Scalars['ID'];
 };
 
@@ -124,7 +130,14 @@ export type ComposeTweetMutation = { __typename?: 'Mutation', createTweet: { __t
 export type FetchFeedListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchFeedListQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'TweetItemResponse', id: string, content: string, user: { __typename?: 'User', id: string, name: string } }> };
+export type FetchFeedListQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'TweetItemResponse', id: string, content: string, likes?: number | null | undefined, comments: number, retweets: number, user: { __typename?: 'User', id: string, name: string } }> };
+
+export type GetTweetsQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type GetTweetsQuery = { __typename?: 'Query', tweet?: { __typename?: 'TweetItemResponse', id: string, content: string, likes?: number | null | undefined, comments: number, retweets: number, user: { __typename?: 'User', id: string, name: string } } | null | undefined };
 
 
 export const FetchUserDocument = `
@@ -180,6 +193,9 @@ export const FetchFeedListDocument = `
   feed {
     id
     content
+    likes
+    comments
+    retweets
     user {
       id
       name
@@ -199,5 +215,34 @@ export const useFetchFeedListQuery = <
     useQuery<FetchFeedListQuery, TError, TData>(
       variables === undefined ? ['fetchFeedList'] : ['fetchFeedList', variables],
       fetcher<FetchFeedListQuery, FetchFeedListQueryVariables>(client, FetchFeedListDocument, variables, headers),
+      options
+    );
+export const GetTweetsDocument = `
+    query getTweets($id: ID!) {
+  tweet(id: $id) {
+    id
+    content
+    likes
+    comments
+    retweets
+    user {
+      id
+      name
+    }
+  }
+}
+    `;
+export const useGetTweetsQuery = <
+      TData = GetTweetsQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables: GetTweetsQueryVariables, 
+      options?: UseQueryOptions<GetTweetsQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => 
+    useQuery<GetTweetsQuery, TError, TData>(
+      ['getTweets', variables],
+      fetcher<GetTweetsQuery, GetTweetsQueryVariables>(client, GetTweetsDocument, variables, headers),
       options
     );

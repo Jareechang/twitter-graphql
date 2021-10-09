@@ -9,9 +9,9 @@ import {
 } from 'react-router-dom';
 import { history } from '@app/client/routes';
 import {
-  Home,
-  Profile,
-  ViewTweet,
+  HomePage,
+  ProfilePage,
+  ViewTweetPage,
 } from '@app/client/pages';
 
 import {
@@ -32,13 +32,13 @@ const Routes: React.FC<RoutesProps> = (
         <Grid item md={6} xs={12}>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <HomePage />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <ProfilePage />
             </Route>
             <Route exact path="/tweets/:id">
-              <ViewTweet />
+              <ViewTweetPage />
             </Route>
           </Switch>
         </Grid>

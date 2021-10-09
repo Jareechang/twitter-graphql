@@ -1,9 +1,14 @@
+import * as React from 'react';
 import {
   Typography,
 } from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import styled from 'styled-components';
+
+import {
+  getTextOrChildren
+} from './utils';
 
 export const UsernameText = styled(Typography)`
   font-size: 14;
@@ -20,7 +25,18 @@ export const TwitterhandleText = styled(Typography)`
 `;
 
 export const FavoritedIcon = styled(FavoriteIcon)`
-path {
-  fill #ff6565;
-}
+  path {
+    fill #ff6565;
+  }
+`;
+
+export const CountText = styled(
+  ({ text, children, ...restProps }) => (
+    <Typography variant="caption" {...restProps}>
+      {getTextOrChildren(text, children)}
+    </Typography>
+  )
+)`
+  padding-left: 0.5rem;
+  display: inline-block;
 `;

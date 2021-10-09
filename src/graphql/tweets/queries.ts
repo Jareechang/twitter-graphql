@@ -65,3 +65,14 @@ export const createTweet = (
     }, 1500);
   });
 }
+
+export const tweet = (
+  parent,
+  args
+): TweetItem => {
+  const tweet = tweets.find(tweet => tweet.id === args.id);
+  return {
+    ...tweet,
+    user: user(tweet.user),
+  };
+}

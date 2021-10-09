@@ -5,17 +5,19 @@ import {
 
 import { ContentLayout } from '@app/client/components';
 
-interface ViewTweetContentProps {}
+import { ViewTweet } from '@app/client/features/view-tweet';
 
-const ViewTweet: React.FC<ViewTweetContentProps> = (
+interface ViewTweetPageProps {}
+
+const ViewTweetPage: React.FC<ViewTweetPageProps> = (
   props
 ) => {
   const { id } = useParams();
   return (
     <ContentLayout>
-      <h3>This is ViewTweet (id: {id})</h3>
+      <ViewTweet id={id}/>
     </ContentLayout>
   );
 }
 
-export default ViewTweet;
+export default ViewTweetPage;

@@ -4,9 +4,9 @@ import { ContentLayout } from '@app/client/components';
 import { ComposeTweet } from '@app/client/features/compose-tweet';
 import { FeedList } from '@app/client/features/feed';
 
-interface HomeContentProps {}
+interface HomePageProps {}
 
-const Home: React.FC<HomeContentProps> = (
+const HomePage: React.FC<HomePageProps> = (
   props
 ) => {
   return (
@@ -17,4 +17,4 @@ const Home: React.FC<HomeContentProps> = (
   );
 }
 
-export default Home;
+export default HomePage;

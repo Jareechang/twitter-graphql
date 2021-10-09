@@ -2,16 +2,16 @@ import * as React from 'react'
 
 import { ContentLayout } from '@app/client/components';
 
-interface ProfileContentProps {}
+interface ProfilePageProps {}
 
-const Profile: React.FC<ProfileContentProps> = (
+const ProfilePage: React.FC<ProfilePageProps> = (
   props
 ) => {
   return (
     <ContentLayout>
-      <h3>This is Profile</h3>
+      <h3>This is ProfilePage</h3>
     </ContentLayout>
   )
 }
 
-export default Profile;
+export default ProfilePage;

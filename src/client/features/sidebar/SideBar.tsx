@@ -17,21 +17,25 @@ export const SideBar: React.FC<SideBarProps> = (
   } = useIsActivePath();
   return (
     <ContentLayout>
-      <Box mx={2}>
-        <MenuList>
+      <Box mx={2} mr={4}>
+        <MenuList sx={{ paddingTop: 0 }}>
           <Link to="/">
-            <MenuItem>
-              <LinkText active={isActivePath('/')}>
-                Home
-              </LinkText>
-            </MenuItem>
+            <Box mb={2}>
+              <MenuItem>
+                <LinkText active={isActivePath('/')}>
+                  Home
+                </LinkText>
+              </MenuItem>
+            </Box>
           </Link>
           <Link to="/profile">
-            <MenuItem>
-              <LinkText active={isActivePath('/profile')}>
-                Profile
-              </LinkText>
-            </MenuItem>
+            <Box mb={2}>
+              <MenuItem>
+                <LinkText active={isActivePath('/profile')}>
+                  Profile
+                </LinkText>
+              </MenuItem>
+            </Box>
           </Link>
         </MenuList>
       </Box>

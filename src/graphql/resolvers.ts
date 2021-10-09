@@ -1,5 +1,5 @@
 import * as userQueries from '@app/graphql/users';
-import { feed, createTweet } from '@app/graphql/tweets'
+import { feed, tweet, createTweet } from '@app/graphql/tweets'
 import * as trendingQueries from '@app/graphql/trending';
 
 export default {
@@ -7,6 +7,7 @@ export default {
     ...userQueries,
     ...trendingQueries,
     feed,
+    tweet,
   },
   Mutation: {
     createTweet

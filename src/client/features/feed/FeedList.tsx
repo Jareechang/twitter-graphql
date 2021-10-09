@@ -8,7 +8,7 @@ import { QueryObserverResult } from 'react-query';
 
 import {
   Link,
-  FeedCard
+  Tweet,
 } from '@app/client/components';
 
 import {
@@ -38,10 +38,13 @@ const FeedList: React.FC<FeedListProps> = (
     return feedList.map((feed: any) => (
       <Box my={3} key={feed.id}>
         <Link to={`/tweets/${feed.id}`}>
-          <FeedCard
+          <Tweet
             id={feed.id}
             username={feed.user.name}
             content={feed.content}
+            likes={feed?.likes ?? 0}
+            retweets={feed?.retweets ?? 0}
+            comments={feed?.comments ?? 0}
           />
         </Link>
       </Box>

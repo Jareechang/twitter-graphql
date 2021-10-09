@@ -3,14 +3,14 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-const useIsActivePath = (path: string) => {
+const useIsActivePath = () => {
   const location = useLocation();
   const pathname = location?.pathname ?? '';
 
-  const isActivePath = React.useCallback((path, options) => {
+  const isActivePath = React.useCallback((path: string) => {
     if (!pathname) return false;
     return pathname === path;
-  }, [location, path]);
+  }, [location, pathname]);
 
   return {
     isActivePath
