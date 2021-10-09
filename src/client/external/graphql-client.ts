@@ -1,12 +1,7 @@
 import { GraphQLClient } from 'graphql-request'
-import {
-  graphqlEndpoint
-} from '@app/client/constants';
 
-// Need to update esbuild with replace plugin
-//const endpoint = process.env.CLIENT_GRAPHQL_ENDPOINT || graphqlEndpoint;
-const endpoint = graphqlEndpoint;
+const graphqlEndpoint = 'http://localhost:4000/graphql';
 
-const client = new GraphQLClient(endpoint);
+const client = new GraphQLClient(graphqlEndpoint);
 
 export default client;

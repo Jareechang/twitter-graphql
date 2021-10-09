@@ -4,11 +4,11 @@ import {
   Box
 } from '@mui/material';
 
-interface LayoutProps {
+interface AppLayoutProps {
   children: React.ReactNode
 }
 
-const Layout: React.FC<LayoutProps> = (
+const AppLayout: React.FC<AppLayoutProps> = (
   props
 ) => {
   return (
@@ -20,4 +20,4 @@ const Layout: React.FC<LayoutProps> = (
   );
 }
 
-export default Layout;
+export default AppLayout;

@@ -39,16 +39,20 @@ const FeedCard: React.FC<FeedCardProps> = (
 ) => {
   const [liked, setLiked] = React.useState(false);
 
-  const handleRouteToComments = React.useCallback(() => {
+  const handleRouteToComments = React.useCallback((e) => {
+    e.preventDefault();
+
     console.log('handle routing to comments with tweet id');
   }, []);
 
-  const handleRetweet = React.useCallback(() => {
+  const handleRetweet = React.useCallback((e) => {
+    e.preventDefault();
     // Increment the retweet count by one using tweet id
     console.log('handle retweet');
   }, []);
 
-  const handleLiked = React.useCallback(() => {
+  const handleLiked = React.useCallback((e) => {
+    e.preventDefault();
     // Transition the UI icon (filled heart)
     setLiked(true);
     // Increment the like count by one using tweet id

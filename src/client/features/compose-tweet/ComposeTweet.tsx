@@ -9,9 +9,9 @@ import {
 } from '@mui/material';
 
 import {
-  CreateTweetMutation,
-  CreateTweetMutationVariables,
-  useCreateTweetMutation,
+  ComposeTweetMutation,
+  ComposeTweetMutationVariables,
+  useComposeTweetMutation,
 } from '@app/graphql';
 import { client } from '@app/client/external';
 
@@ -28,11 +28,11 @@ const CreateTweet: React.FC<CreateTweetProps> = (
   const [text, setText] = React.useState('');
   const feedListState = useFeedListState();
 
-  const createTweetMutation: UseBaseMutationResult<
-    CreateTweetMutation,
+  const composeTweetMutation: UseBaseMutationResult<
+    ComposeTweetMutation,
     any,
-    CreateTweetMutationVariables
-    > = useCreateTweetMutation(
+    ComposeTweetMutationVariables
+    > = useComposeTweetMutation(
       client,
       {
         onMutate: () => {
@@ -61,12 +61,12 @@ const CreateTweet: React.FC<CreateTweetProps> = (
 
   const handleSubmit = React.useCallback((e) => {
     if (text) {
-      createTweetMutation.mutate({
+      composeTweetMutation.mutate({
         id: userId,
         content: text,
       });
     }
-  }, [createTweetMutation]);
+  }, [composeTweetMutation]);
 
   const handleInputChange = React.useCallback((e) => {
     setText(e.target.value);

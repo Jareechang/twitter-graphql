@@ -6,7 +6,7 @@ import {
   QueryClientProvider,
 } from 'react-query';
 import theme from '@app/client/theme';
-import { Layout } from '@app/client/components'
+import { AppLayout } from '@app/client/components'
 
 import { Routes } from '@app/client/routes';
 
@@ -20,9 +20,9 @@ const App: React.FC<AppProps> = (
   return (
     <ThemeProvider theme={theme}>
       <QueryClientProvider client={queryClient}>
-        <Layout>
+        <AppLayout>
           <Routes />
-        </Layout>
+        </AppLayout>
       </QueryClientProvider>
     </ThemeProvider>
   );

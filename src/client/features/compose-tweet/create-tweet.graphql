@@ -1,4 +1,4 @@
-mutation createTweet($id: ID!, $content: String!){
+mutation composeTweet($id: ID!, $content: String!){
   createTweet(id: $id, content: $content) {
     id
     content

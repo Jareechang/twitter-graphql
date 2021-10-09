@@ -113,18 +113,18 @@ export type FetchUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FetchUserQuery = { __typename?: 'Query', users: Array<{ __typename?: 'UserResponse', id: string, name: string, followers?: Array<{ __typename?: 'User', id: string, name: string } | null | undefined> | null | undefined }> };
 
-export type FetchFeedListQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type FetchFeedListQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'TweetItemResponse', id: string, content: string, user: { __typename?: 'User', id: string, name: string } }> };
-
-export type CreateTweetMutationVariables = Exact<{
+export type ComposeTweetMutationVariables = Exact<{
   id: Scalars['ID'];
   content: Scalars['String'];
 }>;
 
 
-export type CreateTweetMutation = { __typename?: 'Mutation', createTweet: { __typename?: 'TweetItem', id: string, content: string, user: string } };
+export type ComposeTweetMutation = { __typename?: 'Mutation', createTweet: { __typename?: 'TweetItem', id: string, content: string, user: string } };
+
+export type FetchFeedListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchFeedListQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'TweetItemResponse', id: string, content: string, user: { __typename?: 'User', id: string, name: string } }> };
 
 
 export const FetchUserDocument = `
@@ -153,6 +153,28 @@ export const useFetchUserQuery = <
       fetcher<FetchUserQuery, FetchUserQueryVariables>(client, FetchUserDocument, variables, headers),
       options
     );
+export const ComposeTweetDocument = `
+    mutation composeTweet($id: ID!, $content: String!) {
+  createTweet(id: $id, content: $content) {
+    id
+    content
+    content
+    user
+  }
+}
+    `;
+export const useComposeTweetMutation = <
+      TError = unknown,
+      TContext = unknown
+    >(
+      client: GraphQLClient, 
+      options?: UseMutationOptions<ComposeTweetMutation, TError, ComposeTweetMutationVariables, TContext>,
+      headers?: RequestInit['headers']
+    ) => 
+    useMutation<ComposeTweetMutation, TError, ComposeTweetMutationVariables, TContext>(
+      (variables?: ComposeTweetMutationVariables) => fetcher<ComposeTweetMutation, ComposeTweetMutationVariables>(client, ComposeTweetDocument, variables, headers)(),
+      options
+    );
 export const FetchFeedListDocument = `
     query fetchFeedList {
   feed {
@@ -177,27 +199,5 @@ export const useFetchFeedListQuery = <
     useQuery<FetchFeedListQuery, TError, TData>(
       variables === undefined ? ['fetchFeedList'] : ['fetchFeedList', variables],
       fetcher<FetchFeedListQuery, FetchFeedListQueryVariables>(client, FetchFeedListDocument, variables, headers),
-      options
-    );
-export const CreateTweetDocument = `
-    mutation createTweet($id: ID!, $content: String!) {
-  createTweet(id: $id, content: $content) {
-    id
-    content
-    content
-    user
-  }
-}
-    `;
-export const useCreateTweetMutation = <
-      TError = unknown,
-      TContext = unknown
-    >(
-      client: GraphQLClient, 
-      options?: UseMutationOptions<CreateTweetMutation, TError, CreateTweetMutationVariables, TContext>,
-      headers?: RequestInit['headers']
-    ) => 
-    useMutation<CreateTweetMutation, TError, CreateTweetMutationVariables, TContext>(
-      (variables?: CreateTweetMutationVariables) => fetcher<CreateTweetMutation, CreateTweetMutationVariables>(client, CreateTweetDocument, variables, headers)(),
       options
     );
