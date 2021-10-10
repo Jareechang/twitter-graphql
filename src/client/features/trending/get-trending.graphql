@@ -1,0 +1,8 @@
+query getTrending {
+  trending {
+    id
+    title
+    description
+    tweets
+  }
+}

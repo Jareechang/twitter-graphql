@@ -7,19 +7,20 @@ const trendingItems : TrendingItem[] = [
     id: '1',
     thumbnail: 'https://via.placeholder.com/150/1ee8a4',
     title: '#FarCry6',
-    tweets: '66k'
+    tweets: '66k',
+    description: ''
   },
   {
     id: '2',
     thumbnail: 'https://via.placeholder.com/150/1ee8a4',
     title: 'Meme Stonks',
-    tweets: '100k'
+    description: 'GME and other meme stocks are on the rise'
   },
   {
     id: '3',
     thumbnail: 'https://via.placeholder.com/150/1ee8a4',
-    title: 'The Dark Knight just released in theaters',
-    tweets: ''
+    title: 'Dark Knight',
+    description: 'The Dark Knight just released in theaters',
   },
   {
     id: '4',
@@ -28,7 +29,7 @@ const trendingItems : TrendingItem[] = [
     tweets: '50.5k'
   },
   {
-    id: '4',
+    id: '5',
     thumbnail: 'https://via.placeholder.com/150/1ee8a4',
     title: 'Vaccines',
     tweets: '20.5k'

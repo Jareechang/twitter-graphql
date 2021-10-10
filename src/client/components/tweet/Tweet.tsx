@@ -94,26 +94,32 @@ const Tweet: React.FC<TweetProps> = (
       </CardContent>
       <CardActions>
         <Box p={1}>
-          <IconButton onClick={handleRouteToComments}>
-            <ChatBubbleOutlineIcon />
+          <Box sx={{ display: 'inline-block' }}>
+            <IconButton onClick={handleRouteToComments}>
+              <ChatBubbleOutlineIcon />
+            </IconButton>
             <TweetImpressionCount
               count={props?.comments ?? 0}
             />
-          </IconButton>
-          <IconButton onClick={handleRetweet}>
-            <RepeatIcon />
+          </Box>
+          <Box sx={{ display: 'inline-block' }}>
+            <IconButton onClick={handleRetweet}>
+              <RepeatIcon />
+            </IconButton>
             <TweetImpressionCount
               count={props?.retweets ?? 0}
             />
-          </IconButton>
-          <IconButton onClick={handleLiked}>
-            {liked ? <FavoritedIcon /> : <FavoriteIcon />}
+          </Box>
+          <Box sx={{ display: 'inline-block' }}>
+            <IconButton onClick={handleLiked}>
+              {liked ? <FavoritedIcon /> : <FavoriteIcon />}
+            </IconButton>
             {liked && (
               <TweetImpressionCount
                 count={props?.likes ?? 0}
               />
             )}
-          </IconButton>
+          </Box>
         </Box>
       </CardActions>
     </Card>

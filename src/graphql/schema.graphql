@@ -44,6 +44,7 @@ type TweetItemResponse {
 type TrendingItem {
   id: ID!
   tweets: String
+  description: String
   title: String!
   thumbnail: String!
 }

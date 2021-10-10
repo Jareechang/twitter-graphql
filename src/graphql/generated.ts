@@ -66,6 +66,7 @@ export type QueryUserArgs = {
 
 export type TrendingItem = {
   __typename?: 'TrendingItem';
+  description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   thumbnail: Scalars['String'];
   title: Scalars['String'];
@@ -132,6 +133,11 @@ export type FetchFeedListQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type FetchFeedListQuery = { __typename?: 'Query', feed: Array<{ __typename?: 'TweetItemResponse', id: string, content: string, likes?: number | null | undefined, comments: number, retweets: number, user: { __typename?: 'User', id: string, name: string } }> };
 
+export type GetTrendingQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTrendingQuery = { __typename?: 'Query', trending: Array<{ __typename?: 'TrendingItem', id: string, title: string, description?: string | null | undefined, tweets?: string | null | undefined }> };
+
 export type GetTweetsQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -166,6 +172,8 @@ export const useFetchUserQuery = <
       fetcher<FetchUserQuery, FetchUserQueryVariables>(client, FetchUserDocument, variables, headers),
       options
     );
+useFetchUserQuery.getKey = (variables?: FetchUserQueryVariables) => variables === undefined ? ['fetchUser'] : ['fetchUser', variables];
+
 export const ComposeTweetDocument = `
     mutation composeTweet($id: ID!, $content: String!) {
   createTweet(id: $id, content: $content) {
@@ -217,6 +225,34 @@ export const useFetchFeedListQuery = <
       fetcher<FetchFeedListQuery, FetchFeedListQueryVariables>(client, FetchFeedListDocument, variables, headers),
       options
     );
+useFetchFeedListQuery.getKey = (variables?: FetchFeedListQueryVariables) => variables === undefined ? ['fetchFeedList'] : ['fetchFeedList', variables];
+
+export const GetTrendingDocument = `
+    query getTrending {
+  trending {
+    id
+    title
+    description
+    tweets
+  }
+}
+    `;
+export const useGetTrendingQuery = <
+      TData = GetTrendingQuery,
+      TError = unknown
+    >(
+      client: GraphQLClient, 
+      variables?: GetTrendingQueryVariables, 
+      options?: UseQueryOptions<GetTrendingQuery, TError, TData>,
+      headers?: RequestInit['headers']
+    ) => 
+    useQuery<GetTrendingQuery, TError, TData>(
+      variables === undefined ? ['getTrending'] : ['getTrending', variables],
+      fetcher<GetTrendingQuery, GetTrendingQueryVariables>(client, GetTrendingDocument, variables, headers),
+      options
+    );
+useGetTrendingQuery.getKey = (variables?: GetTrendingQueryVariables) => variables === undefined ? ['getTrending'] : ['getTrending', variables];
+
 export const GetTweetsDocument = `
     query getTweets($id: ID!) {
   tweet(id: $id) {
@@ -246,3 +282,4 @@ export const useGetTweetsQuery = <
       fetcher<GetTweetsQuery, GetTweetsQueryVariables>(client, GetTweetsDocument, variables, headers),
       options
     );
+useGetTweetsQuery.getKey = (variables: GetTweetsQueryVariables) => ['getTweets', variables];

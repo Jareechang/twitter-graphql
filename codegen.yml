@@ -12,6 +12,7 @@ generates:
     config:
       fetcher: 'graphql-request'
       endpoint: 'http://localhost:4000/graphql'
+      exposeQueryKeys: true
 
   ./graphql.schema.json:
     plugins:

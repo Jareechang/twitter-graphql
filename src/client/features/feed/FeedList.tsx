@@ -27,10 +27,10 @@ const FeedList: React.FC<FeedListProps> = (
     client,
   );
 
-  const feedList = feedListRequest?.data?.feed || [];
-  const isRefetching = feedListRequest?.isRefetching || false;
-  const isFetching = feedListRequest?.isFetching || false;
-  const isError = feedListRequest?.error || false;
+  const feedList : FetchFeedListQuery['feed'] = feedListRequest?.data?.feed || [];
+  const isRefetching : boolean = feedListRequest?.isRefetching || false;
+  const isFetching : boolean = feedListRequest?.isFetching || false;
+  const isError : boolean = feedListRequest?.isError || false;
 
   const renderFeedList = React.useCallback(() => {
     const isValidData = Array.isArray(feedList) && feedList.length > 0;
